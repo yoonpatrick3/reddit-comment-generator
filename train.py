@@ -3,7 +3,8 @@ from textgenrnn import textgenrnn
 textFile = input("Enter txt file name: ")
 numEpochs = int(input("Enter number of epochs: "))
 
-pathToFile = "\\Users\yoonp\independentCS\MLTEST\textFiles\\" + textFile + ".txt"
+#Change path to find text file here!
+pathToFile = "C:\\Users\\yoonp\\independentCS\\MLTEST\\textFiles\\" + textFile + ".txt"
 
 
 t = textgenrnn()
