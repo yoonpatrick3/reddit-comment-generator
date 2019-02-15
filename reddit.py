@@ -18,28 +18,39 @@ if choice == "c" or choice == "t":
 	subreddit = reddit.subreddit(sb)
 	
 	if choice == "c":
-		cm = int(input("Num comments: "))
+		cm = input("Num comments limit (or no limit say none): ")
 		
-		
-		
-		with open(os.path.join(save_path,'commentFile.txt'), 'w+', encoding='utf-8') as file:
-			for comment in subreddit.comments(limit=cm):
-				file.write(str(comment.body) + "\n")
+		if cm == "none":
+			with open(os.path.join(save_path,'commentFile.txt'), 'w+', encoding='utf-8') as file:
+				for comment in subreddit.comments(limit=None):
+					file.write(str(comment.body) + "\n")
+		else:
+			with open(os.path.join(save_path,'commentFile.txt'), 'w+', encoding='utf-8') as file:
+				for comment in subreddit.comments(limit=int(cm)):
+					file.write(str(comment.body) + "\n")
 	
 	else:
 	
-		cm = int(input("Num titles: "))
-			
-	
-		with open(os.path.join(save_path,'titleFile.txt'), 'w+', encoding='utf-8') as file2:
-			for sub in subreddit.hot(limit=cm):
-				file2.write(str(sub.title) + "\n")
+		cm = input("Num titles limit (or no limit say none): ")
+
+		if cm == "none":
+			with open(os.path.join(save_path,'titleFile.txt'), 'w+', encoding='utf-8') as file2:
+				for sub in subreddit.hot(limit=None):
+					file2.write(str(sub.title) + "\n")
+		else:
+			with open(os.path.join(save_path,'titleFile.txt'), 'w+', encoding='utf-8') as file2:
+				for sub in subreddit.hot(limit=int(cm)):
+					file2.write(str(sub.title) + "\n")
 
 else:
 	un = input("Which account: ")
-	cm = int(input("Num comments: "))
-	comments = reddit.redditor(un).comments.new(limit=cm)
+	cm = input("Num comment limit (or no limit say none): ")
 	
+	if cm == "none":
+		comments = reddit.redditor(un).comments.new(limit=None)
+		
+	else:
+		comments = reddit.redditor(un).comments.new(limit=int(cm))
 	
 	with open(os.path.join(save_path,'accountFile.txt'), 'w+', encoding='utf-8') as file:
 		for comment in comments:
